@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>inicio</title>
+    <style>
+        /* Estilos existentes... */
+        body {
+            background-color: rgb(165, 165, 165);
+            text-align: left;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: honeydew;
+            background-color: #333;
+            padding: 10px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 1000; /* Asegura que el encabezado esté por encima del contenido */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-buttons {
+            position: fixed;
+            width: 50%;
+            text-align: left;
+            margin-top: 80px;
+            top: 0;
+            left: 0;
+        }
+
+        .header-buttons a {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 5px 15px;
+            background-color: #f8f5f5;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-buttons a:hover {
+            background-color: #555;
+        }
+
+        .gridViewBtn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 5px 0px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 10px;
+            cursor: pointer;
+            width: 8%;
+            margin-top: 1cm;
+            margin-left: 40cm;
+        }
+
+        .listViewBtn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 5px 0px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 10px;
+            cursor: pointer;
+            width: 8%;
+            margin-top: 6cm;
+            margin-left: 40cm;
+        }
+
+        .searchBar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        .searchBar input[type="text"] {
+            width: 200px;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .searchBar input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .searchBar input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilos para las imágenes de los productos */
+        .producto img {
+            width: auto;
+            height: 100px;
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+
+        /* Estilos para el contenedor de productos */
+        #producto {
+            text-align: left;
+            margin-top: 1cm;
+            margin-left: 6cm;
+            margin-right: 2cm;
+            word-wrap: break-word;
+            overflow: hidden;
+            /* Para evitar el desbordamiento horizontal */
+        }
+
+        .producto-columna {
+            width: 20%;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .producto {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: auto;
+            padding-left: 20px;
+            /* Para evitar el desbordamiento horizontal */
+        }
+
+        /* Estilo para la vista de lista */
+        .list-view .producto {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: auto;
+            padding-left: 20px;
+            /* Espacio para la imagen */
+        }
+
+        .list-view .producto img {
+            width: auto;
+            margin-right: 20px;
+        }
+
+        .producto-info {
+            width: 70%;
+        }
+
+        /* Estilo para la vista de mosaico */
+        .grid-view .producto {
+            width: 20%;
+            height: auto;
+            float: left;
+            margin-right: 1%;
+            display: block;
+        }
+
+        .grid-view .producto img {
+            float: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            /* Estilo para dispositivos móviles */
+            .grid-view .producto {
+                width: 48%;
+            }
+        }
+
+        #currentPageText {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 0cm;
+            margin-right: 0cm;
+        }
+
+        #jumpToPageInput {
+            width: 50px;
+        }
+
+        .pagination-bottom {
+            position: relative;
+            margin-bottom: 100px;
+            margin-left: 0%;
+            width: 100%;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            display: inline-flex; /* Alineación de los elementos en la parte inferior */
+            justify-content: center;
+        }
+
+        .pagination-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination-top .nav-btn,
+        .pagination-bottom .nav-btn,
+        .pagination-top a,
+        .pagination-bottom a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #555;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .pagination-top .nav-btn:hover,
+        .pagination-bottom .nav-btn:hover,
+        .pagination-top a:hover,
+        .pagination-bottom a:hover {
+            background-color: #333;
+        }
+
+        #pageButtonsTop,
+        #pageButtonsBottom {
+            display: inline-block;
+            justify-content: center;
+            margin: 0 5px;
+            padding: 5px 10px;
+        }
+
+        #currentPageTextTop,
+        #currentPageTextBottom {
+            margin-left: 10px;
+            color: #555;
+        }
+
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <h1>DECLAVO</h1>
+        <div class="searchBar">
+            <form id="searchForm" action="#">
+                <input id="searchInput" type="text" placeholder="Buscar productos...">
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+    </header>
+
+
+    <button class="listViewBtn" onclick="cambiarEstilo('list')">Lista</button>
+    <button class="gridViewBtn" onclick="cambiarEstilo('grid')">Mosaico</button>
+
+
+
+    <div class="pagination-top">
+        <button id="prevPageBtnTop" class="nav-btn" onclick="prevPageTop()">Anterior</button>
+        <div id="pageButtonsTop"></div>
+        <button id="nextPageBtnTop" class="nav-btn" onclick="nextPageTop()">Siguiente</button>
+        <div id="currentPageTextTop">Pagina:<span id="currentPageNumberTop">1</span></div>
+        <input type="text" id="jumpToPageInputTop" placeholder="Ir a pagina...">
+        <button id="jumpToPageBtnTop" class="nav-btn" onclick="jumpToPageTop()">Ir</button>
+    </div>
+
+
+
+    <div id="producto"></div>
+
+    <div class="pagination-bottom">
+        <button id="prevPageBtn" class="nav-btn">Anterior</button>
+        <div id="pageButtons"></div>
+        <button id="nextPageBtn" class="nav-btn">Siguiente</button>
+        <div id="currentPageText">Pagina:<span id="currentPageNumber">1</span></div>
+        <input type="text" id="jumpToPageInput" placeholder="Ir a pagina...">
+        <button id="jumpToPageBtn" class="nav-btn" onclick="jumpToPage()">Ir</button>
+    </div>
+
+    <script src="xlsx.full.min.js"></script>
+    <script>
+        var currentPage = localStorage.getItem('currentPage') || 1;
+        var productsPerPage = 10;
+
+        function showCurrentPageProducts() {
+            var startIndex = (currentPage - 1) * productsPerPage;
+            var endIndex = startIndex + productsPerPage;
+            var allProducts = document.querySelectorAll('.producto');
+
+            allProducts.forEach(function (product, index) {
+                if (index >= startIndex && index < endIndex) {
+                    product.style.display = 'block'; // Mostrar el producto si está en el rango de la página actual
+                } else {
+                    product.style.display = 'none'; // Ocultar el producto si está fuera del rango de la página actual
+                }
+            });
+
+            document.getElementById('currentPageNumber').textContent = currentPage;
+        }
+
+        function prevPageTop() {
+            if (currentPage > 1) {
+                currentPage--;
+                showCurrentPageProducts();
+                localStorage.setItem('currentPage', currentPage);
+            }
+        }
+
+        function nextPageTop() {
+            var totalProducts = document.querySelectorAll('.producto').length;
+            var totalPages = Math.ceil(totalProducts / productsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                showCurrentPageProducts();
+                localStorage.setItem('currentPage', currentPage);
+            }
+        }
+</script> 
+    <script>
+        var req = new XMLHttpRequest();
+        var req = new XMLHttpRequest();
+    req.open('GET', 'datosweb.xlsx', true);
+    req.responseType = 'arraybuffer';
+
+    req.onload = function (e) {
+        var data = new Uint8Array(req.response);
+        var workbook = XLSX.read(data, {type: 'array'});
+        var worksheet = workbook.Sheets['Hoja1'];
+
+        var productosDiv = document.getElementById('producto');
+        productosDiv.innerHTML = '';
+
+        var range = XLSX.utils.decode_range(worksheet['!ref']);
+
+        for (var rowNum = range.s.r + 1; rowNum <= range.e.r; rowNum++) {
+            var producto = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 0})];
+            var Descripcion = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 1})];
+            var marca = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 2})];
+            var unidades = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 3})];
+            var contacto = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 4})];
+            var imagen = producto.v + '.jpg';
+
+            var productoDiv = document.createElement('div');
+            productoDiv.classList.add('producto');
+            productoDiv.innerHTML = '<img src="Fotos/' + imagen + '" alt="' + producto.v + '">' + '<div class="producto-info"><h3>' + producto.v + '</h3><p>Marca: ' + marca.v + '</p><p>Descripcion: ' + Descripcion.v + '</p><p>Unidades: ' + unidades.v + '</p><p>Contacto: <a href="mailto:' + contacto.v + '?subject=Consulta sobre ' + producto.v + '&body=Descripcion: ' + Descripcion.v + '%0A Marca: ' + marca.v + '%0A Unidades: ' + unidades.v + '">Enviar consulta</a></p></div>';
+
+            productosDiv.appendChild(productoDiv);
+        }
+    };
+
+    req.send();
+
+
+    var currentPage = localStorage.getItem('currentPage') || 1;
+    var productsPerPage = 10;
+
+    function showCurrentPageProducts() {
+    var startIndex = (currentPage - 1) * productsPerPage;
+    var endIndex = startIndex + productsPerPage;
+    var allProducts = document.querySelectorAll('.producto');
+
+    allProducts.forEach(function (product, index) {
+        if (index >= startIndex && index < endIndex) {
+            product.style.display = 'block'; // Mostrar el producto si está en el rango de la página actual
+        } else {
+            product.style.display = 'none'; // Ocultar el producto si está fuera del rango de la página actual
+        }
+    });
+
+    document.getElementById('currentPageNumber').textContent = currentPage;
+}
+
+    showCurrentPageProducts();
+
+    document.getElementById('prevPageBtn').addEventListener('click', function () {
+        if (currentPage > 1) {
+            currentPage--;
+            showCurrentPageProducts();
+            localStorage.setItem('currentPage', currentPage);
+        }
+    });
+
+    document.getElementById('nextPageBtn').addEventListener('click', function () {
+        var totalProducts = document.querySelectorAll('.producto').length;
+        var totalPages = Math.ceil(totalProducts / productsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            showCurrentPageProducts();
+            localStorage.setItem('currentPage', currentPage);
+        }
+    });
+
+    document.getElementById('jumpToPageInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            jumpToPage();
+        }
+    });
+
+    document.getElementById('jumpToPageInputTop').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            jumpToPageTop();
+        }
+    });
+
+    function jumpToPage() {
+        var pageNumber = parseInt(document.getElementById('jumpToPageInput').value);
+        var totalProducts = document.querySelectorAll('.producto').length;
+        var totalPages = Math.ceil(totalProducts / productsPerPage);
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            currentPage = pageNumber;
+            showCurrentPageProducts();
+            localStorage.setItem('currentPage', currentPage);
+            document.getElementById('jumpToPageInput').value = '';
+        } else {
+            alert('Por favor, introduzca un número de página válido.');
+        }
+    }
+
+    function jumpToPageTop() {
+        var pageNumber = parseInt(document.getElementById('jumpToPageInputTop').value);
+        var totalProducts = document.querySelectorAll('.producto').length;
+        var totalPages = Math.ceil(totalProducts / productsPerPage);
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            currentPage = pageNumber;
+            showCurrentPageProducts();
+            localStorage.setItem('currentPage', currentPage);
+            document.getElementById('jumpToPageInputTop').value = '';
+        } else {
+            alert('Por favor, introduzca un número de página válido.');
+        }
+    }
+
+
+
+    function cambiarEstilo(estilo) {
+        var productoDiv = document.getElementById('producto');
+        productoDiv.classList.remove('list-view', 'grid-view');
+        productoDiv.classList.add(estilo + '-view');
+    }
+
+    document.getElementById('searchForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Evitar el envío del formulario
+
+        var searchText = document.getElementById('searchInput').value.toLowerCase();
+        var allProducts = document.querySelectorAll('.producto');
+
+        allProducts.forEach(function (product) {
+            var productName = product.querySelector('h3').textContent.toLowerCase();
+            var productDescription = product.querySelector('p:nth-of-type(2)').textContent.toLowerCase(); // Buscar en la descripción
+            var productMarca = product.querySelector('p:nth-of-type(1)').textContent.toLowerCase(); // Buscar en la marca
+            var productUnidades = product.querySelector('p:nth-of-type(3)').textContent.toLowerCase(); // Buscar en las unidades
+
+            // Verificar si el texto de búsqueda está presente en cualquiera de los elementos del producto
+            if (productName.includes(searchText) || productDescription.includes(searchText) || productMarca.includes(searchText) || productUnidades.includes(searchText)) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    });
+
+        function goToPage(pageNumber) {
+            currentPage = pageNumber;
+            showCurrentPageProducts();
+            localStorage.setItem('currentPage', currentPage);
+        }
+
+        function generatePageButtons(totalPages) {
+            var pageButtonsContainer = document.getElementById('pageButtons');
+            pageButtonsContainer.innerHTML = '';
+
+            for (var i = 1; i <= totalPages; i++) {
+                var pageButton = document.createElement('a');
+                pageButton.textContent = i;
+                pageButton.href = '#';
+                pageButton.onclick = function () {
+                    goToPage(parseInt(this.textContent));
+                };
+                pageButtonsContainer.appendChild(pageButton);
+            }
+        }
+
+        window.onload = function () {
+            var totalProducts = document.querySelectorAll('.producto').length;
+            var totalPages = Math.ceil(totalProducts / productsPerPage);
+            generatePageButtons(totalPages);
+        };
+
+        function generatePageButtonsTop(totalPages) {
+    var pageButtonsContainerTop = document.getElementById('pageButtonsTop');
+    pageButtonsContainerTop.innerHTML = '';
+
+    for (var i = 1; i <= totalPages; i++) {
+        var pageButtonTop = document.createElement('a');
+        pageButtonTop.textContent = i;
+        pageButtonTop.href = '#';
+        pageButtonTop.onclick = function () {
+            goToPageTop(parseInt(this.textContent));
+        };
+        pageButtonsContainerTop.appendChild(pageButtonTop);
+    }
+}
+
+function goToPageTop(pageNumber) {
+    currentPage = pageNumber;
+    showCurrentPageProducts();
+    localStorage.setItem('currentPage', currentPage);
+}
+
+window.onload = function () {
+    var totalProducts = document.querySelectorAll('.producto').length;
+    var totalPages = Math.ceil(totalProducts / productsPerPage);
+    generatePageButtons(totalPages); // Llama a la función para los botones inferiores
+    generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
+};
+
+        // Funciones de filtro
+        function filterByMarca(marca) {
+            var allProducts = document.querySelectorAll('.producto');
+
+            allProducts.forEach(function (product) {
+                var productName = product.querySelector('h3').textContent;
+                if (productName.includes(marca)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function filterByFamilia(familia) {
+            var allProducts = document.querySelectorAll('.producto');
+
+            allProducts.forEach(function (product) {
+                var productDescription = product.querySelector('p:last-of-type').textContent;
+                if (productDescription.includes(familia)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</main>
+</body>
+</html>
