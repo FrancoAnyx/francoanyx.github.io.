@@ -481,60 +481,60 @@
         });
     });
 
-        function goToPage(pageNumber) {
-            currentPage = pageNumber;
-            showCurrentPageProducts();
-            localStorage.setItem('currentPage', currentPage);
-        }
-
-        function generatePageButtons(totalPages) {
-            var pageButtonsContainer = document.getElementById('pageButtons');
-            pageButtonsContainer.innerHTML = '';
-
-            for (var i = 1; i <= totalPages; i++) {
-                var pageButton = document.createElement('a');
-                pageButton.textContent = i;
-                pageButton.href = '#';
-                pageButton.onclick = function () {
-                    goToPage(parseInt(this.textContent));
-                };
-                pageButtonsContainer.appendChild(pageButton);
-            }
-        }
-
-        window.onload = function () {
-            var totalProducts = document.querySelectorAll('.producto').length;
-            var totalPages = Math.ceil(totalProducts / productsPerPage);
-            generatePageButtons(totalPages);
-        };
-
-        function generatePageButtonsTop(totalPages) {
-    var pageButtonsContainerTop = document.getElementById('pageButtonsTop');
-    pageButtonsContainerTop.innerHTML = '';
-
-    for (var i = 1; i <= totalPages; i++) {
-        var pageButtonTop = document.createElement('a');
-        pageButtonTop.textContent = i;
-        pageButtonTop.href = '#';
-        pageButtonTop.onclick = function () {
-            goToPageTop(parseInt(this.textContent));
-        };
-        pageButtonsContainerTop.appendChild(pageButtonTop);
+           function goToPage(pageNumber) {
+        currentPage = pageNumber;
+        showCurrentPageProducts();
+        localStorage.setItem('currentPage', currentPage);
     }
-}
 
-function goToPageTop(pageNumber) {
-    currentPage = pageNumber;
-    showCurrentPageProducts();
-    localStorage.setItem('currentPage', currentPage);
-}
+    function generatePageButtons(totalPages) {
+        var pageButtonsContainer = document.getElementById('pageButtons');
+        pageButtonsContainer.innerHTML = '';
 
-window.onload = function () {
-    var totalProducts = document.querySelectorAll('.producto').length;
-    var totalPages = Math.ceil(totalProducts / productsPerPage);
-    generatePageButtons(totalPages); // Llama a la función para los botones inferiores
-    generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
-};
+        for (var i = 1; i <= totalPages; i++) {
+            var pageButton = document.createElement('a');
+            pageButton.textContent = i;
+            pageButton.href = '#';
+            pageButton.onclick = function () {
+                goToPage(parseInt(this.textContent));
+            };
+            pageButtonsContainer.appendChild(pageButton);
+        }
+    }
+
+    window.onload = function () {
+        var totalProducts = document.querySelectorAll('.producto').length;
+        var totalPages = Math.ceil(totalProducts / productsPerPage);
+        generatePageButtons(totalPages);
+    };
+
+    function generatePageButtonsTop(totalPages) {
+        var pageButtonsContainerTop = document.getElementById('pageButtonsTop');
+        pageButtonsContainerTop.innerHTML = '';
+
+        for (var i = 1; i <= totalPages; i++) {
+            var pageButtonTop = document.createElement('a');
+            pageButtonTop.textContent = i;
+            pageButtonTop.href = '#';
+            pageButtonTop.onclick = function () {
+                goToPageTop(parseInt(this.textContent));
+            };
+            pageButtonsContainerTop.appendChild(pageButtonTop);
+        }
+    }
+
+    function goToPageTop(pageNumber) {
+        currentPage = pageNumber;
+        showCurrentPageProducts();
+        localStorage.setItem('currentPage', currentPage);
+    }
+
+    window.onload = function () {
+        var totalProducts = document.querySelectorAll('.producto').length;
+        var totalPages = Math.ceil(totalProducts / productsPerPage);
+        generatePageButtons(totalPages); // Llama a la función para los botones inferiores
+        generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
+    };
 
         // Funciones de filtro
         function filterByMarca(marca) {
