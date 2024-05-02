@@ -205,7 +205,7 @@
         }
 
         .pagination-bottom {
-            position: relative;
+            position: flex;
             margin-bottom: 100px;
             margin-left: 0%;
             width: 100%;
@@ -214,6 +214,7 @@
             text-align: center;
             display: inline-flex; /* Alineación de los elementos en la parte inferior */
             justify-content: center;
+            align-items: center;
         }
 
         .pagination-top {
@@ -301,9 +302,11 @@
 
     <script src="xlsx.full.min.js"></script>
     <script>
+    
         var currentPage = localStorage.getItem('currentPage') || 1;
         var productsPerPage = 10;
 
+        
         function showCurrentPageProducts() {
             var startIndex = (currentPage - 1) * productsPerPage;
             var endIndex = startIndex + productsPerPage;
@@ -506,6 +509,9 @@
             var totalProducts = document.querySelectorAll('.producto').length;
             var totalPages = Math.ceil(totalProducts / productsPerPage);
             generatePageButtons(totalPages);
+            generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
+
+            showCurrentPageProducts();
         };
 
         function generatePageButtonsTop(totalPages) {
@@ -529,12 +535,7 @@ function goToPageTop(pageNumber) {
     localStorage.setItem('currentPage', currentPage);
 }
 
-window.onload = function () {
-    var totalProducts = document.querySelectorAll('.producto').length;
-    var totalPages = Math.ceil(totalProducts / productsPerPage);
-    generatePageButtons(totalPages); // Llama a la función para los botones inferiores
-    generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
-};
+
 
         // Funciones de filtro
         function filterByMarca(marca) {
