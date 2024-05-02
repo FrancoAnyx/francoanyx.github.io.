@@ -523,6 +523,66 @@
             jumpToPageTop();
         }
     });
+         <!-- Botones de filtro y ordenación -->
+    <div class="filter-buttons">
+        <button onclick="filterByCategory('Electrónica')">Electrónica</button>
+        <button onclick="filterByCategory('Ropa')">Ropa</button>
+        <button onclick="sortByPrice('asc')">Precio ascendente</button>
+        <button onclick="sortByPrice('desc')">Precio descendente</button>
+    </div>
+
+    <!-- Sección de ofertas -->
+    <div class="ofertas-section">
+        <h2>Ofertas Especiales</h2>
+        <div class="oferta">
+            <img src="oferta1.jpg" alt="Oferta 1">
+            <p>¡Aprovecha esta oferta especial en productos seleccionados!</p>
+        </div>
+        <div class="oferta">
+            <img src="oferta2.jpg" alt="Oferta 2">
+            <p>¡Gran descuento en productos de electrónica!</p>
+        </div>
+    </div>
+
+    <!-- Sección de productos relacionados -->
+    <div class="related-products-section">
+        <h2>Productos Relacionados</h2>
+        <div class="related-products">
+            <div class="related-product">
+                <img src="relacionado1.jpg" alt="Producto relacionado 1">
+                <p>Producto Relacionado 1</p>
+            </div>
+            <div class="related-product">
+                <img src="relacionado2.jpg" alt="Producto relacionado 2">
+                <p>Producto Relacionado 2</p>
+            </div>
+            <div class="related-product">
+                <img src="relacionado3.jpg" alt="Producto relacionado 3">
+                <p>Producto Relacionado 3</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de comentarios -->
+    <div class="comments-section">
+        <h2>Comentarios de Clientes</h2>
+        <div class="comment">
+            <p>¡Este producto es increíble! Lo recomiendo totalmente.</p>
+        </div>
+        <div class="comment">
+            <p>No estaba seguro al principio, pero después de usarlo, estoy muy satisfecho con mi compra.</p>
+        </div>
+    </div>
+
+    <!-- Sección de información adicional -->
+    <div class="info-section">
+        <h2>Información Adicional</h2>
+        <p>Descubre más sobre nuestra empresa y nuestras políticas de envío y devolución.</p>
+        <a href="about.html">Acerca de Nosotros</a>
+        <a href="shipping.html">Envío y Devolución</a>
+        <a href="contact.html">Contacto</a>
+    </div>
+
 
     function jumpToPage() {
         var pageNumber = parseInt(document.getElementById('jumpToPageInput').value);
@@ -662,66 +722,6 @@
                 }
             });
         }
-
-         <!-- Botones de filtro y ordenación -->
-    <div class="filter-buttons">
-        <button onclick="filterByCategory('Electrónica')">Electrónica</button>
-        <button onclick="filterByCategory('Ropa')">Ropa</button>
-        <button onclick="sortByPrice('asc')">Precio ascendente</button>
-        <button onclick="sortByPrice('desc')">Precio descendente</button>
-    </div>
-
-    <!-- Sección de ofertas -->
-    <div class="ofertas-section">
-        <h2>Ofertas Especiales</h2>
-        <div class="oferta">
-            <img src="oferta1.jpg" alt="Oferta 1">
-            <p>¡Aprovecha esta oferta especial en productos seleccionados!</p>
-        </div>
-        <div class="oferta">
-            <img src="oferta2.jpg" alt="Oferta 2">
-            <p>¡Gran descuento en productos de electrónica!</p>
-        </div>
-    </div>
-
-    <!-- Sección de productos relacionados -->
-    <div class="related-products-section">
-        <h2>Productos Relacionados</h2>
-        <div class="related-products">
-            <div class="related-product">
-                <img src="relacionado1.jpg" alt="Producto relacionado 1">
-                <p>Producto Relacionado 1</p>
-            </div>
-            <div class="related-product">
-                <img src="relacionado2.jpg" alt="Producto relacionado 2">
-                <p>Producto Relacionado 2</p>
-            </div>
-            <div class="related-product">
-                <img src="relacionado3.jpg" alt="Producto relacionado 3">
-                <p>Producto Relacionado 3</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sección de comentarios -->
-    <div class="comments-section">
-        <h2>Comentarios de Clientes</h2>
-        <div class="comment">
-            <p>¡Este producto es increíble! Lo recomiendo totalmente.</p>
-        </div>
-        <div class="comment">
-            <p>No estaba seguro al principio, pero después de usarlo, estoy muy satisfecho con mi compra.</p>
-        </div>
-    </div>
-
-    <!-- Sección de información adicional -->
-    <div class="info-section">
-        <h2>Información Adicional</h2>
-        <p>Descubre más sobre nuestra empresa y nuestras políticas de envío y devolución.</p>
-        <a href="about.html">Acerca de Nosotros</a>
-        <a href="shipping.html">Envío y Devolución</a>
-        <a href="contact.html">Contacto</a>
-    </div>
 
     </script>
 
