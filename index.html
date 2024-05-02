@@ -3,8 +3,7 @@
 <head>
     <title>inicio</title>
     <style>
-        /* Estilos existentes... */
-        body {
+   body {
             background-color: rgb(165, 165, 165);
             text-align: left;
             padding: 0;
@@ -271,7 +270,6 @@
             margin-left: 10px;
             color: #555;
         }
-
     </style>
 </head>
 <body>
@@ -316,9 +314,11 @@
 
     <script src="xlsx.full.min.js"></script>
     <script>
+    
         var currentPage = localStorage.getItem('currentPage') || 1;
         var productsPerPage = 10;
 
+        
         function showCurrentPageProducts() {
             var startIndex = (currentPage - 1) * productsPerPage;
             var endIndex = startIndex + productsPerPage;
@@ -517,7 +517,15 @@
             }
         }
 
-  
+        window.onload = function () {
+            var totalProducts = document.querySelectorAll('.producto').length;
+            var totalPages = Math.ceil(totalProducts / productsPerPage);
+            generatePageButtons(totalPages);
+            generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
+        
+             showCurrentPageProducts(estilo);
+        };
+
         function generatePageButtonsTop(totalPages) {
     var pageButtonsContainerTop = document.getElementById('pageButtonsTop');
     pageButtonsContainerTop.innerHTML = '';
@@ -538,16 +546,6 @@ function goToPageTop(pageNumber) {
     showCurrentPageProducts();
     localStorage.setItem('currentPage', currentPage);
 }
-
-window.onload = function () {
-    var totalProducts = document.querySelectorAll('.producto').length;
-    var totalPages = Math.ceil(totalProducts / productsPerPage);
-    generatePageButtons(totalPages); // Llama a la función para los botones inferiores
-    generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
-    
-    showCurrentPageProducts();
-
-};
 
 
 
