@@ -247,8 +247,8 @@
         #pageButtonsBottom {
             display: inline-block;
             justify-content: center;
-            margin: 0 5;
-            padding: 5 10;
+            margin: 0 5px;
+            padding: 5px 10px;
         }
 
         #currentPageTextTop,
@@ -256,7 +256,6 @@
             margin-left: 10px;
             color: #555;
         }
-
 
     </style>
 </head>
@@ -482,60 +481,60 @@
         });
     });
 
-           function goToPage(pageNumber) {
-        currentPage = pageNumber;
-        showCurrentPageProducts();
-        localStorage.setItem('currentPage', currentPage);
-    }
-
-    function generatePageButtons(totalPages) {
-        var pageButtonsContainer = document.getElementById('pageButtons');
-        pageButtonsContainer.innerHTML = '';
-
-        for (var i = 1; i <= totalPages; i++) {
-            var pageButton = document.createElement('a');
-            pageButton.textContent = i;
-            pageButton.href = '#';
-            pageButton.onclick = function () {
-                goToPage(parseInt(this.textContent));
-            };
-            pageButtonsContainer.appendChild(pageButton);
+        function goToPage(pageNumber) {
+            currentPage = pageNumber;
+            showCurrentPageProducts();
+            localStorage.setItem('currentPage', currentPage);
         }
-    }
 
-    window.onload = function () {
-        var totalProducts = document.querySelectorAll('.producto').length;
-        var totalPages = Math.ceil(totalProducts / productsPerPage);
-        generatePageButtons(totalPages);
-    };
+        function generatePageButtons(totalPages) {
+            var pageButtonsContainer = document.getElementById('pageButtons');
+            pageButtonsContainer.innerHTML = '';
 
-    function generatePageButtonsTop(totalPages) {
-        var pageButtonsContainerTop = document.getElementById('pageButtonsTop');
-        pageButtonsContainerTop.innerHTML = '';
-
-        for (var i = 1; i <= totalPages; i++) {
-            var pageButtonTop = document.createElement('a');
-            pageButtonTop.textContent = i;
-            pageButtonTop.href = '#';
-            pageButtonTop.onclick = function () {
-                goToPageTop(parseInt(this.textContent));
-            };
-            pageButtonsContainerTop.appendChild(pageButtonTop);
+            for (var i = 1; i <= totalPages; i++) {
+                var pageButton = document.createElement('a');
+                pageButton.textContent = i;
+                pageButton.href = '#';
+                pageButton.onclick = function () {
+                    goToPage(parseInt(this.textContent));
+                };
+                pageButtonsContainer.appendChild(pageButton);
+            }
         }
-    }
 
-    function goToPageTop(pageNumber) {
-        currentPage = pageNumber;
-        showCurrentPageProducts();
-        localStorage.setItem('currentPage', currentPage);
-    }
+        window.onload = function () {
+            var totalProducts = document.querySelectorAll('.producto').length;
+            var totalPages = Math.ceil(totalProducts / productsPerPage);
+            generatePageButtons(totalPages);
+        };
 
-    window.onload = function () {
-        var totalProducts = document.querySelectorAll('.producto').length;
-        var totalPages = Math.ceil(totalProducts / productsPerPage);
-        generatePageButtons(totalPages); // Llama a la función para los botones inferiores
-        generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
-    };
+        function generatePageButtonsTop(totalPages) {
+    var pageButtonsContainerTop = document.getElementById('pageButtonsTop');
+    pageButtonsContainerTop.innerHTML = '';
+
+    for (var i = 1; i <= totalPages; i++) {
+        var pageButtonTop = document.createElement('a');
+        pageButtonTop.textContent = i;
+        pageButtonTop.href = '#';
+        pageButtonTop.onclick = function () {
+            goToPageTop(parseInt(this.textContent));
+        };
+        pageButtonsContainerTop.appendChild(pageButtonTop);
+    }
+}
+
+function goToPageTop(pageNumber) {
+    currentPage = pageNumber;
+    showCurrentPageProducts();
+    localStorage.setItem('currentPage', currentPage);
+}
+
+window.onload = function () {
+    var totalProducts = document.querySelectorAll('.producto').length;
+    var totalPages = Math.ceil(totalProducts / productsPerPage);
+    generatePageButtons(totalPages); // Llama a la función para los botones inferiores
+    generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
+};
 
         // Funciones de filtro
         function filterByMarca(marca) {
@@ -563,7 +562,6 @@
                 }
             });
         }
-
     </script>
 
 </main>
