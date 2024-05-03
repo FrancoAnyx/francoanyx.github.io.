@@ -168,12 +168,11 @@
             margin-right: 20px;
         }
 
-       .producto-info {
+        .producto-info {
             height: auto;
             width: 70%;
             align-items: end;
         }
-
 
         /* Estilo para la vista de mosaico */
         .grid-view .producto {
@@ -231,8 +230,7 @@
             text-align: center;
             display: inline-flex; /* Alineación de los elementos en la parte inferior */
             justify-content: center;
-            align-item: center;
-            
+            align-items: center;
         }
 
         .pagination-top {
@@ -528,8 +526,12 @@
             generatePageButtons(totalPages);
             generatePageButtonsTop(totalPages); // Llama a la función para los botones superiores
         
-             showCurrentPageProducts();
+             showCurrentPageProducts(estilo);
         };
+
+
+    
+    
 
         function generatePageButtonsTop(totalPages) {
     var pageButtonsContainerTop = document.getElementById('pageButtonsTop');
