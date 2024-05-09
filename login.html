@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($usuarios["usuarios"] as $usuario) {
         if ($usuario["username"] === $username && $usuario["password"] === $password) {
             // Las credenciales son correctas, redirigir al usuario a la página principal
-            header("Location: principal.html");
+            header("Location: principal");
             exit; // Detener la ejecución del script después de redirigir
         }
     }
