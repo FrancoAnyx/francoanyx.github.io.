@@ -153,22 +153,25 @@
             background-color: #f0f0f0;
         }
 
-       /* Estilos CSS para dispositivos móviles */
+/* Estilos CSS para dispositivos móviles */
 @media screen and (max-width: 600px) {
     body {
-        font-size: 14px; /* Reducir el tamaño del texto */
+        font-size: 14px; /* Reducir el tamaño del texto en todo el cuerpo */
     }
     header {
         padding: 10px 0; /* Reducir el espacio en el encabezado */
+        font-size: 24px; /* Reducir el tamaño del texto en el encabezado */
     }
     main {
         padding: 20px; /* Reducir el espacio en el contenido principal */
     }
     .producto {
-        width: calc(100% - 20px); /* Hacer que los productos ocupen todo el ancho de la pantalla */
+        width: calc(50% - 20px); /* Reducir el ancho de los productos para que quepan dos en una fila */
+        font-size: 16px; /* Reducir el tamaño del texto en los productos */
     }
     /* Agrega más reglas CSS según sea necesario para adaptar otros elementos */
 }
+
 
     </style>
 </head>
