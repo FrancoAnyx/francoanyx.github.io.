@@ -333,6 +333,13 @@ document.getElementById('marca-select').addEventListener('change', filterByMarca
             }
         });
     });
+
+   // Función de limpiar la búsqueda
+document.getElementById('clearButton').addEventListener('click', function () {
+    document.getElementById('searchInput').value = '';
+    filterByMarca();
+});
+
      
      // Función de búsqueda de productos con sugerencias
      var searchInput = document.getElementById('searchInput');
@@ -375,17 +382,13 @@ document.getElementById('marca-select').addEventListener('change', filterByMarca
         }
     }
 
-    function filterByMarca() {
+  function filterByMarca() {
     var selectedMarca = document.getElementById('marca-select').value.toLowerCase(); // Convertir a minúsculas
     var allProductos = document.querySelectorAll('.producto');
-
-    console.log("Marca seleccionada:", selectedMarca); // Verificar la marca seleccionada en la consola
 
     allProductos.forEach(function(producto) {
         var marcaTexto = producto.querySelector('p:nth-of-type(1)').textContent.trim().toLowerCase(); // Obtener y convertir a minúsculas
         var marca = marcaTexto.split(':')[1].trim(); // Obtener la marca después de "Marca:" y eliminar espacios alrededor
-
-        console.log("Marca del producto:", marca); // Verificar la marca de cada producto en la consola
 
         if (selectedMarca === 'all' || marca === selectedMarca) {
             producto.style.display = 'block'; // Mostrar producto si coincide con la marca seleccionada o si se selecciona "Todos"
