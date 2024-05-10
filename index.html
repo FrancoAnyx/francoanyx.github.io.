@@ -214,7 +214,7 @@ req.onload = function (e) {
 
         var productoDiv = document.createElement('div');
         productoDiv.classList.add('producto');
-        productoDiv.innerHTML = '<img src="Fotos/' + imagen + '" alt="' + producto.v + '">' + '<div class="producto-info"><h3>' + producto.v + '</h3><p>Marca: ' + marca.v + '</p><p>Descripcion: ' + Descripcion.v + '</p><p>Unidades: ' + unidades.v + '</p><p>Contacto: <a href="mailto:' + contacto.v + '?subject=Consulta sobre ' + producto.v + '&body=Descripcion: ' + Descripcion.v + '%0A Marca: ' + marca.v + '%0A Unidades: ' + unidades.v + '">Enviar consulta</a></p></div>';
+        productoDiv.innerHTML = '<div class="producto-info"><h3>' + producto.v + '</h3><p>Marca: ' + marca.v + '</p><p>Descripcion: ' + Descripcion.v + '</p><p>Unidades: ' + unidades.v + '</p><p>Contacto: <a href="mailto:' + contacto.v + '?subject=Consulta sobre ' + producto.v + '&body=Descripcion: ' + Descripcion.v + '%0A Marca: ' + marca.v + '%0A Unidades: ' + unidades.v + '">Enviar consulta</a></p></div>';
 
         productosDiv.appendChild(productoDiv);
     }
