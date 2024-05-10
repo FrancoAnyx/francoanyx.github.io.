@@ -68,7 +68,7 @@
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        .searchBar input[type="submit"] {
+        .searchBar button {
             background-color: #4CAF50;
             color: white;
             padding: 10px 15px;
@@ -79,7 +79,7 @@
             margin-left: 10px;
         }
 
-        .searchBar input[type="submit"]:hover {
+        .searchBar button:hover {
             background-color: #45a049;
         }
 
@@ -127,9 +127,34 @@
             background-color: #7cf180;
             color: white;
         }
-       
+
+        
+        /* Estilos para las sugerencias */
+        #sugerencias {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .sugerencia {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sugerencia:hover {
+            background-color: #f0f0f0;
+        }
+
        .marca-select {
-          backgroung-color: 333;
+          background-color: #333;
           color: white;
        }
 
@@ -177,7 +202,7 @@
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        .searchBar input[type="submit"] {
+        .searchBar button {
             background-color: #4CAF50;
             color: white;
             padding: 4px 5px;
@@ -188,12 +213,12 @@
             margin-left: 10px;
         }
 
-        .searchBar input[type="submit"]:hover {
+        .searchBar button:hover {
             background-color: #45a049;        }
    
        .marca-select {
           width: 80px;
-          backgroung-color: 333;
+          background-color: #333;
           color: white;
        }
     /* Agrega más reglas CSS según sea necesario para adaptar otros elementos */
@@ -224,7 +249,7 @@
 </main>
 
 <footer>
-    <p>© 2024 DECLAVO</p>
+    <p>© 2024 Mi Página Web Profesional</p>
 </footer>
 
 <script src="xlsx.full.min.js"></script>
@@ -283,36 +308,25 @@ req.send();
 document.getElementById('marca-select').addEventListener('change', filterByMarca);
 
 
-    
-   // Función de búsqueda de productos
-   document.getElementById('searchForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // Evitar el envío del formulario
+// Función de búsqueda de productos
+document.getElementById('searchButton').addEventListener('click', function (event) {
+    searchProducts();
+});
 
-        var searchText = document.getElementById('searchInput').value.toLowerCase();
-        var allProducts = document.querySelectorAll('.producto');
+// Función de activar la búsqueda al presionar Enter
+document.getElementById('searchInput').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        searchProducts();
+    }
+});
 
-        allProducts.forEach(function (product) {
-            var productName = product.querySelector('h3').textContent.toLowerCase();
-            var productDescription = product.querySelector('p:nth-of-type(2)').textContent.toLowerCase(); // Buscar en la descripción
-            var productMarca = product.querySelector('p:nth-of-type(1)').textContent.toLowerCase(); // Buscar en la marca
-            var productUnidades = product.querySelector('p:nth-of-type(3)').textContent.toLowerCase(); // Buscar en las unidades
-
-            // Verificar si el texto de búsqueda está presente en cualquiera de los elementos del producto
-            if (productName.includes(searchText) || productDescription.includes(searchText) || productMarca.includes(searchText) || productUnidades.includes(searchText)) {
-                product.style.display = 'block';
-            } else {
-                product.style.display = 'none';
-            }
-        });
-    });
-
-   // Función de limpiar la búsqueda
+// Función de limpiar la búsqueda
 document.getElementById('clearButton').addEventListener('click', function () {
     document.getElementById('searchInput').value = '';
     filterByMarca();
 });
 
-  function filterByMarca() {
+function filterByMarca() {
     var selectedMarca = document.getElementById('marca-select').value.toLowerCase(); // Convertir a minúsculas
     var allProductos = document.querySelectorAll('.producto');
 
@@ -327,7 +341,29 @@ document.getElementById('clearButton').addEventListener('click', function () {
         }
     });
 }
-    </script>
+
+function searchProducts() {
+    var searchText = document.getElementById('searchInput').value.trim().toLowerCase();
+    var allProducts = document.querySelectorAll('.producto');
+
+    allProducts.forEach(function (product) {
+        var productName = product.querySelector('h3').textContent.toLowerCase();
+        var productDescription = product.querySelector('p:nth-of-type(2)').textContent.toLowerCase(); // Buscar en la descripción
+        var productMarca = product.querySelector('p:nth-of-type(1)').textContent.toLowerCase(); // Buscar en la marca
+        var productUnidades = product.querySelector('p:nth-of-type(3)').textContent.toLowerCase(); // Buscar en las unidades
+
+        var isVisible = product.style.display !== 'none'; // Verificar si el producto es visible
+
+        // Verificar si el texto de búsqueda está presente en cualquiera de los elementos del producto y si el producto es visible
+        if ((isVisible && productName.includes(searchText)) || (isVisible && productDescription.includes(searchText)) || (isVisible && productMarca.includes(searchText)) || (isVisible && productUnidades.includes(searchText))) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+}
+    
+</script>
 
 </body>
-</html> 
+</html>
