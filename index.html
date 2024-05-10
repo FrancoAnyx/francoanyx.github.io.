@@ -163,6 +163,7 @@
             <input type="submit" value="Buscar">
         </form>
     </div>
+    
     <select id="marca-select">
     <option value="all">Todos</option>
 </select>
@@ -181,52 +182,59 @@
 
 <script src="xlsx.full.min.js"></script>
 <script>
-   // Función para cargar los productos desde el archivo Excel
-   var req = new XMLHttpRequest();
-    req.open('GET', 'datosweb.xlsx', true);
-    req.responseType = 'arraybuffer';
+        
+        var req = new XMLHttpRequest();
+req.open('GET', 'datosweb.xlsx', true);
+req.responseType = 'arraybuffer';
 
-    req.onload = function (e) {
-        var data = new Uint8Array(req.response);
-        var workbook = XLSX.read(data, {type: 'array'});
-        var worksheet = workbook.Sheets['Hoja1'];
+req.onload = function (e) {
+    var data = new Uint8Array(req.response);
+    var workbook = XLSX.read(data, {type: 'array'});
+    var worksheet = workbook.Sheets['Hoja1'];
 
-        var productosDiv = document.getElementById('producto');
-        productosDiv.innerHTML = '';
+    var productosDiv = document.getElementById('producto');
+    productosDiv.innerHTML = '';
 
-        var range = XLSX.utils.decode_range(worksheet['!ref']);
+    var range = XLSX.utils.decode_range(worksheet['!ref']);
 
-        for (var rowNum = range.s.r + 1; rowNum <= range.e.r; rowNum++) {
-            var producto = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 0})];
-            var Descripcion = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 1})];
-            var marca = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 2})];
-            var unidades = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 3})];
-            var contacto = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 4})];
-            var imagen = producto.v + '.jpg';
+    var marcasUnicas = []; // Array para almacenar marcas únicas
 
-            var productoDiv = document.createElement('div');
-            productoDiv.classList.add('producto');
-            productoDiv.innerHTML = '<div class="producto-info"><h3>' + producto.v + '</h3><p>Marca: ' + marca.v + '</p><p>Descripción: ' + Descripcion.v + '</p><p>Unidades: ' + unidades.v + '</p><p>Contacto: <a href="mailto:' + contacto.v + '?subject=Consulta sobre ' + producto.v + '&body=Descripción: ' + Descripcion.v + '%0A Marca: ' + marca.v + '%0A Unidades: ' + unidades.v + '">Enviar consulta</a></p></div>' ;
+    for (var rowNum = range.s.r + 1; rowNum <= range.e.r; rowNum++) {
+        var producto = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 0})];
+        var Descripcion = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 1})];
+        var marca = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 2})];
+        var unidades = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 3})];
+        var contacto = worksheet[XLSX.utils.encode_cell({r: rowNum, c: 4})];
+        var imagen = producto.v + '.jpg';
 
-            productoDiv.addEventListener('click', function() {
-                // Remover la clase 'selected' de todos los productos
-                var allProducts = document.querySelectorAll('.producto');
-                allProducts.forEach(function (product) {
-                    product.classList.remove('selected');
-                });
-                // Agregar la clase 'selected' al producto seleccionado
-                this.classList.add('selected'); 
-            });
-
-            productosDiv.appendChild(productoDiv);
+        // Agregar la marca al array de marcas únicas si aún no está presente
+        if (!marcasUnicas.includes(marca.v)) {
+            marcasUnicas.push(marca.v);
         }
-    };
 
-    req.send();
+        var productoDiv = document.createElement('div');
+        productoDiv.classList.add('producto');
+        productoDiv.innerHTML = '<img src="Fotos/' + imagen + '" alt="' + producto.v + '">' + '<div class="producto-info"><h3>' + producto.v + '</h3><p>Marca: ' + marca.v + '</p><p>Descripcion: ' + Descripcion.v + '</p><p>Unidades: ' + unidades.v + '</p><p>Contacto: <a href="mailto:' + contacto.v + '?subject=Consulta sobre ' + producto.v + '&body=Descripcion: ' + Descripcion.v + '%0A Marca: ' + marca.v + '%0A Unidades: ' + unidades.v + '">Enviar consulta</a></p></div>';
+
+        productosDiv.appendChild(productoDiv);
+    }
+
+    // Agregar las opciones de marca al menú desplegable
+    var marcaSelect = document.getElementById('marca-select');
+    marcasUnicas.forEach(function(marca) {
+        var option = document.createElement('option');
+        option.value = marca;
+        option.textContent = marca;
+        marcaSelect.appendChild(option);
+    });
+};
+
+req.send();
 
 
-    // Escuchar cambios en el menú desplegable de marca
+// Escuchar cambios en el menú desplegable de marca
 document.getElementById('marca-select').addEventListener('change', filterByMarca);
+
 
     
    // Función de búsqueda de productos
