@@ -127,32 +127,7 @@
             background-color: #7cf180;
             color: white;
         }
-
-        
-        /* Estilos para las sugerencias */
-        #sugerencias {
-            position: absolute;
-            top: 50px;
-            right: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            width: 200px;
-            display: none;
-            z-index: 1000;
-        }
-
-        .sugerencia {
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .sugerencia:hover {
-            background-color: #f0f0f0;
-        }
-
+       
        .marca-select {
           backgroung-color: 333;
           color: white;
@@ -340,48 +315,6 @@ document.getElementById('clearButton').addEventListener('click', function () {
     filterByMarca();
 });
 
-     
-     // Función de búsqueda de productos con sugerencias
-     var searchInput = document.getElementById('searchInput');
-    var sugerenciasDiv = document.getElementById('sugerencias');
-
-    searchInput.addEventListener('input', function() {
-        var searchText = this.value.trim().toLowerCase();
-        var allProducts = document.querySelectorAll('.producto');
-
-        // Filtrar los productos basados en el texto de búsqueda
-        var sugerencias = [];
-        allProducts.forEach(function (product) {
-            var productName = product.querySelector('h3').textContent.toLowerCase();
-            if (productName.startsWith(searchText)) {
-                sugerencias.push(productName);
-            }
-        });
-
-        // Mostrar sugerencias
-        mostrarSugerencias(sugerencias);
-    });
-
-    function mostrarSugerencias(sugerencias) {
-        sugerenciasDiv.innerHTML = '';
-        sugerencias.forEach(function(sugerencia) {
-            var sugerenciaDiv = document.createElement('div');
-            sugerenciaDiv.classList.add('sugerencia');
-            sugerenciaDiv.textContent = sugerencia;
-            sugerenciaDiv.addEventListener('click', function() {
-                searchInput.value = sugerencia;
-                sugerenciasDiv.innerHTML = '';
-            });
-            sugerenciasDiv.appendChild(sugerenciaDiv);
-        });
-
-        if (sugerencias.length > 0) {
-            sugerenciasDiv.style.display = 'block';
-        } else {
-            sugerenciasDiv.style.display = 'none';
-        }
-    }
-
   function filterByMarca() {
     var selectedMarca = document.getElementById('marca-select').value.toLowerCase(); // Convertir a minúsculas
     var allProductos = document.querySelectorAll('.producto');
@@ -397,8 +330,6 @@ document.getElementById('clearButton').addEventListener('click', function () {
         }
     });
 }
-
-    
     </script>
 
 </body>
