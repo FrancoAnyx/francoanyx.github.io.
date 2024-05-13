@@ -291,7 +291,10 @@ req.onload = function (e) {
         productosDiv.appendChild(productoDiv);
     }
 
-    // Agregar las opciones de marca al menú desplegable
+    // Ordenar marcas alfabéticamente
+    marcasUnicas.sort();
+
+    // Agregar las opciones de marca al menú desplegable en orden alfabético
     var marcaSelect = document.getElementById('marca-select');
     marcasUnicas.forEach(function(marca) {
         var option = document.createElement('option');
